@@ -41,10 +41,13 @@ $.ajax({
 })
 console.log(dataSheets);
 
+
 input = dataSheets.values.reverse();
 console.log(input);
 var rows = dataSheets.values.length
-for (var i = 0; 0 < rows; i++){
+
+
+for (var i = 0; i < rows; i++){
 	var id = i.toString()
 	var article = $("<article class = 'post' id = art" + id + ">" + 
 		            	"<header id = hd" + id + ">" + 
@@ -64,7 +67,7 @@ for (var i = 0; 0 < rows; i++){
 							"<img src='" + input[i][8] + "' alt='' id = img2" + id + "/>" +
 						"</a>" +
 						"<p id = p" + id + "></p>" +
-						"<footer>" + id +
+						"<footer id = f" + id + ">" +
 							"<ul class='actions'>" +
 								"<li><a href='#'' class='button big'>Continue Reading</a></li>" +
 							"</ul>" +
@@ -88,7 +91,7 @@ for (var i = 0; 0 < rows; i++){
 
 
 	console.log(typeof input[i][4], input[i][4]);
-};
+}
 
 
 
