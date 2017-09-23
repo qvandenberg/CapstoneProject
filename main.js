@@ -3,27 +3,15 @@ const spreadsheetID = "1EX_QfOxLd6JM12nuSwlaJ4vJo4cESEf8wAXaHmFQfcg";
 const API_KEY = "?key=AIzaSyDQkiv-Fe56n9mcjFZ0BEZpJI5c-RhmyvE";
 var range = "/values/" + "A" + ":" + "A";
 var dataSheets = {};
-/*
-//find range of data
-$.get(link + spreadsheetID + range + API_KEY, function(data, status){
-	console.log("Length:", data.values.length, "Status :", status);
-	range = "/values/" + "A2:" + "I" + (data.values.length).toString();
 
-})
-//new get request for all the data
-	         	$.get(link + spreadsheetID + range + API_KEY, function(data, status){
-					console.log("Data:", data, "Status :", status);
-					dataSheets = data;
-				})
-*/
-
+// finding no. of rows from spreadsheet 
 $.ajax({
 	type: "GET",
 	url: link + spreadsheetID + range + API_KEY,
 	async: false,
 	success: function(data, status){
 	         	console.log("Length:", data.values.length, "Status :", status);
-	         	range = "/values/" + "A2:" + "M" + (data.values.length).toString();
+	         	range = "/values/" + "A2:" + "N" + (data.values.length).toString();
 	     	}
 
 })
@@ -114,7 +102,35 @@ function render(){
 	for (var i = poststart; i < postend; i++){
 		console.log('post', i)
 		var id = i.toString()
-		var article = $("<article class = 'post' id = art" + id + ">" +
+		
+		//setting color scheme
+		theme = input[i][13]
+		var textcolor = '#aaaaaa';
+		var bgcolor = 'white'
+ 		if (theme == 'Forest (Green)'){
+			textcolor = 'green'
+			bgcolor = '#9EFB86'
+		}
+		if (theme == 'Sea (Blue)'){
+			console.log('color change')
+			textcolor = '#064273'
+			bgcolor = '#7fcdff'
+		}
+		if (theme == 'City (Yellow)'){
+			textcolor = '#41423D'
+			bgcolor = '#EDF009'
+		}
+		if (theme == 'Sunrise (Red)'){
+			textcolor = '#D92A22'
+			bgcolor = '#FD7D01'
+		}
+		if (theme == 'Beach (Beige)') {
+			textcolor = '#F3802C'
+			bgcolor = '#ffeead'
+		}
+		
+		
+		var article = $("<article class = 'post' id = art" + id + " style = 'background:"+ bgcolor + "'>" +
 							"<header id = hd" + id + ">" +
 								"<div class = 'title'>" +
 									 "<h2 id = h" + id + "></h2>" +
@@ -174,6 +190,10 @@ function render(){
 			input[i][10]=input[i][10].replace("watch?v=", "embed/");
 			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][10]+"'></iframe>")
 		}
-
+		
+		// styling text color
+		var textId = ["#name"+id, "#t"+id, "#h"+id, "#sub"+id, "#topic"+id, "#p"+id, ]
+		for (id of textId) $(id).css('color', textcolor);
+		$("#art"+id).css('background', bgcolor);
 	}
 }
