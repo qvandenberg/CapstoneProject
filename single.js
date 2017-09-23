@@ -1,7 +1,33 @@
 window.onload = () => {
 	var readId = window.location.search.substr(1);
 	console.log(readId)
-	var singleArticle = $("<article class='post' id=sart" + readId + ">" +
+	//setting color scheme
+	theme = input[readId][13]
+	var textcolor = '#888888';
+	var bgcolor = 'white'
+	if (theme == 'Forest (Green)'){
+		textcolor = 'green'
+		bgcolor = '#9EFB86'
+	}
+	if (theme == 'Sea (Blue)'){
+		console.log('color change')
+		textcolor = '#064273'
+		bgcolor = '#7fcdff'
+	}
+	if (theme == 'City (Yellow)'){
+		textcolor = '#41423D'
+		bgcolor = '#EDF009'
+	}
+	if (theme == 'Sunrise (Red)'){
+		textcolor = '#D92A22'
+		bgcolor = '#FD7D01'
+	}
+	if (theme == 'Beach (Beige)') {
+		textcolor = '#F3802C'
+		bgcolor = '#ffeead'
+	}
+	
+	var singleArticle = $("<article class='post' id=sart" + readId + " style = 'background:"+ bgcolor + "'>" +
 									"<header>" +
 										"<div class='title'>" +
 											"<h2 id=sh" + readId + "><a href='#'></a></h2>" +
@@ -26,7 +52,7 @@ window.onload = () => {
 									"</footer>" +
 								"</article>");
 
-	$("#smainpost").append(singleArticle); //article 
+	$("#smainpost").append(singleArticle); //article
 	$("#sname"+readId).append(input[readId][11]); //author name
 	$("#st"+readId).append(input[readId][2]); //title
 	$("#sh"+readId).append(input[readId][3]); //heading
@@ -44,6 +70,10 @@ window.onload = () => {
 		$("#span"+readId).append("<iframe width='840' height='500' src='"+input[readId][10]+"'></iframe>")
 	}
 	console.log(typeof window.location.search, readId);
+	
+	// styling text color
+		var textId = ["#sname"+readId, "#st"+readId, "#sh"+readId, "#ssub"+readId, "#stopic"+readId, "#sp"+readId, ]
+		for (id of textId) $(id).css('color', textcolor);
 
 	//Scroll to body
 	$(document).ready(function () {
@@ -52,13 +82,5 @@ window.onload = () => {
         scrollTop: $('#sp' + readId).offset().top
     }, 'slow');
 });
-	
+
 }
-
-
-
-
-
-
-
-
