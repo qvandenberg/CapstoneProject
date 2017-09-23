@@ -23,7 +23,7 @@ $.ajax({
 	async: false,
 	success: function(data, status){
 	         	console.log("Length:", data.values.length, "Status :", status);
-	         	range = "/values/" + "A2:" + "I" + (data.values.length).toString();
+	         	range = "/values/" + "A2:" + "K" + (data.values.length).toString();
 	     	}
 
 })
@@ -83,7 +83,6 @@ function render(){
 								"</div>" +
 							"</header>" +
 							"<a href='#' class='image featured' id = a2" + id + ">" +
-								"<img src='" + input[i][8] + "' alt='' id = img2" + id + "/>" +
 							"</a>" +
 							"<p id = p" + id + "></p>" +
 							"<footer id = f" + id + ">" +
@@ -97,13 +96,25 @@ function render(){
 								"</ul>" +
 							"</footer>" +
 						"</article>");	
-		$("#mainposts").append(article);
-		$("#name" + id).append(input[i][2]);
-		$("#t" + id).append(input[i][3]);
-		$("#h" + id).append(input[i][4]);
-		$("#sub" + id).append(input[i][5]);
-		$("#p" + id).append(input[i][6]);
-		$("#topic" + id).append(input[i][7]);
+		$("#mainposts").append(article); //article
+		$("#name"+id).append(input[i][2]); //author name
+		$("#t"+id).append(input[i][3]); //title
+		$("#h"+id).append(input[i][4]); //heading
+		$("#sub"+id).append(input[i][5]); //subheading
+		$("#p"+id).append(input[i][6]); //paragraph
+		$("#topic"+id).append(input[i][7]); //topic
+		
+		//inserting image or video
+		console.log(input[i][10])
+		if (input[i][10] == "IMAGE"){
+			$("#a2"+id).append("<img src='"+input[i][8]+"' alt='' />")
+		} else if (input[i][10] == "VIDEO") {
+		//	swap watch?v= with embed/ in input[i][8]
+		input[i][8]=input[i][8].replace("watch?v=", "embed/");
+		console.log(input[i][8])
+			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][8]+"'></iframe>")
+		}
+		
 	}
 }
 
