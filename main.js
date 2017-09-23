@@ -131,7 +131,7 @@ function render(){
 							"</a>" +
 							"<p id = p" + id + "></p>" +
 							"<footer id = f" + id + ">" +
-								"<ul class='actions'>" +
+								"<ul class='actions' id=ul" + id + ">" +
 									"<li><a href='single.html?" + id + "#sp" + id + "' class='button big' id = read" + id + ">Continue Reading</a></li>" +
 								"</ul>" +
 								"<ul class='stats'>" +
@@ -147,8 +147,15 @@ function render(){
 		$("#t"+id).append(input[i][2]); //time
 		$("#h"+id).append(input[i][3]); //heading
 		$("#sub"+id).append(input[i][4]); //subheading
-		$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
 		$("#topic"+id).append(input[i][6]); //topic
+
+		//continue reading ... & btn
+		if (input[i][5].length > 350){
+			$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
+		} else {
+			$("#p"+id).append(input[i][5])
+			$("#ul"+id).empty()
+		}
 
 		//inserting avatar image if exists
 		if (input[i][12]){
