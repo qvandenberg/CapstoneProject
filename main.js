@@ -145,8 +145,8 @@ var singleArticle = $("<article class='post' id=sart" + readId + ">" +
 										"<img src='images/avatar.jpg' alt='' id=simg1" + readId + "/></a>" +
 									"</div>" +
 								"</header>" +
-								"<span class='image featured'>" +
-								"<img src='images/pic01.jpg' alt='' id=simg2" + readId + "/></span>" +
+								"<span class='image featured' id=span" + readId + ">" +
+								"</span>" +
 								"<p id=sp" + readId + "></p>" +
 								"<footer>" +
 									"<ul class='stats'>" +
@@ -168,12 +168,12 @@ var singleArticle = $("<article class='post' id=sart" + readId + ">" +
 		//inserting image or video
 		console.log(input[readId][10])
 		if (input[readId][10] == "IMAGE"){
-			$("#a2"+id).append("<img src='"+input[readId][8]+"' alt='' />")
+			$("#span"+readId).append("<img src='"+input[readId][8]+"' alt='' />")
 		} else if (input[readId][10] == "VIDEO") {
 		//	swap watch?v= with embed/ in input[i][8]
 		input[readId][8]=input[readId][8].replace("watch?v=", "embed/");
 		console.log(input[readId][8])
-			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[readId][8]+"'></iframe>")
+			$("#span"+readId).append("<iframe width='840' height='500' src='"+input[readId][8]+"'></iframe>")
 		}
 console.log(typeof window.location.search, readId);		
 }
