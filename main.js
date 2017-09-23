@@ -23,7 +23,7 @@ $.ajax({
 	async: false,
 	success: function(data, status){
 	         	console.log("Length:", data.values.length, "Status :", status);
-	         	range = "/values/" + "A2:" + "K" + (data.values.length).toString();
+	         	range = "/values/" + "A2:" + "L" + (data.values.length).toString();
 	     	}
 
 })
@@ -44,7 +44,7 @@ var input = dataSheets.values.reverse();
 // Removing not archived
 var notArchived = []
 for (obji in input){
-	if (input[obji][9]=="YES") notArchived.push(input[obji])
+	if (input[obji][7]=="YES") notArchived.push(input[obji])
 }
 input = notArchived
 
@@ -137,21 +137,23 @@ function render(){
 								"</ul>" +
 							"</footer>" +
 						"</article>");
+		
 		$("#mainposts").append(article); //article
-		$("#name"+id).append(input[i][2]); //author name
-		$("#t"+id).append(input[i][3]); //title
-		$("#h"+id).append(input[i][4]); //heading
-		$("#sub"+id).append(input[i][5]); //subheading
-		$("#p"+id).append(input[i][6].substr(0, 350) + "..."); //paragraph
-		$("#topic"+id).append(input[i][7]); //topic
-
+		$("#name"+id).append(input[i][11]); console.log("name:", input[i][11]); //author name
+		$("#t"+id).append(input[i][2]); //time
+		$("#h"+id).append(input[i][3]); //heading
+		$("#sub"+id).append(input[i][4]); //subheading
+		$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
+		$("#topic"+id).append(input[i][6]); //topic
+		
 		//inserting image or video
-		if (input[i][10] == "IMAGE"){
-			$("#a2"+id).append("<img src='"+input[i][8]+"' alt='' />")
-		} else if (input[i][10] == "VIDEO") {
+		if (input[i][8] == "IMAGE"){
+			input[i][9]=input[i][9].replace("open?id=", "uc?id=");
+			$("#a2"+id).append("<img src='"+input[i][9]+"&export=download' alt='' />")
+		} else if (input[i][8] == "VIDEO") {
 			//	swap watch?v= with embed/ in input[i][8]
-			input[i][8]=input[i][8].replace("watch?v=", "embed/");
-			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][8]+"'></iframe>")
+			input[i][10]=input[i][10].replace("watch?v=", "embed/");
+			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][10]+"'></iframe>")
 		}
 
 	}
