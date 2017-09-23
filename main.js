@@ -81,7 +81,7 @@ $("#loadprev").click(function(){
 			postend = poststart+postNum;
 			$("#loadprev").removeClass('disabled');
 			$("#loadnext").removeClass('disabled');
-			render()*/ 
+			render()*/
 		}
     else if (poststart-postNum > 0){
         poststart -= postNum
