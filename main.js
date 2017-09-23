@@ -175,10 +175,9 @@ function render(){
 function menubar(){
 	for (let i = poststart; i < postend; i++){
 		let id = i.toString();
-		console.log("menubar function invoked");
 		let menuItem = $("<li>"+
-										 "<a href="+"#" +">"+ // placeholder for link
-											"<h3> id=menuh"+ id+"></h3>"+
+										 "<a href=\'single.html?"+id+"#sp" +id+"\'>"+ // placeholder for link
+											"<h3 id=menuh"+ id+"></h3>"+
 											"<p id= p2id"+id+"></p>"+
 											"</a>"+
 											"</li>"
@@ -187,5 +186,5 @@ function menubar(){
 		$("#menuitems").append(menuItem); //menu item
 		$("#menuh"+id).append(input[i][3]); // title
 		$("#p2id"+id).append(input[i][4]); // subtitle
-}
+}}
 menubar();
