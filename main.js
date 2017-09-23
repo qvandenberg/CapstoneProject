@@ -42,6 +42,14 @@ $.ajax({
 console.log(dataSheets);
 
 input = dataSheets.values.reverse();
+
+// Removing not archived 
+var notArchived = []
+for (obji in input){
+	if (input[obji][9]=="YES") notArchived.push(input[obji])
+}
+input = notArchived
+
 console.log(input);
 var numberofposts = dataSheets.values.length
 var poststart = 0, postend = 5
@@ -60,7 +68,6 @@ $("#load").click(function(){
 		render()
 		$("#load").addClass('disabled')
 	}
-	console.log('A', poststart, 'B', postend);
 })
 
 var readclicked = 0;
@@ -110,13 +117,11 @@ function render(){
 		$("#topic"+id).append(input[i][7]); //topic
 		
 		//inserting image or video
-		console.log(input[i][10])
 		if (input[i][10] == "IMAGE"){
 			$("#a2"+id).append("<img src='"+input[i][8]+"' alt='' />")
 		} else if (input[i][10] == "VIDEO") {
-		//	swap watch?v= with embed/ in input[i][8]
-		input[i][8]=input[i][8].replace("watch?v=", "embed/");
-		console.log(input[i][8])
+			//	swap watch?v= with embed/ in input[i][8]
+			input[i][8]=input[i][8].replace("watch?v=", "embed/");
 			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][8]+"'></iframe>")
 		}
 
