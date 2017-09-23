@@ -26,22 +26,22 @@ window.onload = () => {
 									"</footer>" +
 								"</article>");
 
-	$("#smainpost").append(singleArticle); //article
-	$("#sname"+readId).append(input[readId][2]); //author name
-	$("#st"+readId).append(input[readId][3]); //title
-	$("#sh"+readId).append(input[readId][4]); //heading
-	$("#ssub"+readId).append(input[readId][5]); //subheading
-	$("#sp"+readId).append(input[readId][6]); //paragraph
-	$("#stopic"+readId).append(input[readId][7]); //topic
+	$("#smainpost").append(singleArticle); //article 
+	$("#sname"+readId).append(input[readId][11]); console.log ("name:" input[readId][11] )//author name
+	$("#st"+readId).append(input[readId][2]); //title
+	$("#sh"+readId).append(input[readId][3]); //heading
+	$("#ssub"+readId).append(input[readId][4]); //subheading
+	$("#sp"+readId).append(input[readId][5]); //paragraph
+	$("#stopic"+readId).append(input[readId][6]); //topic
 
 	//inserting image or video
-	if (input[readId][10] == "IMAGE"){
-		$("#span"+readId).append("<img src='"+input[readId][8]+"' alt='' />")
-	} else if (input[readId][10] == "VIDEO") {
+	if (input[readId][8] == "IMAGE"){
+		$("#span"+readId).append("<img src='"+input[readId][9]+"' alt='' />")
+	} else if (input[readId][8] == "VIDEO") {
 		//	swap watch?v= with embed/ in input[i][8]
-		input[readId][8]=input[readId][8].replace("watch?v=", "embed/");
-		console.log(input[readId][8])
-		$("#span"+readId).append("<iframe width='840' height='500' src='"+input[readId][8]+"'></iframe>")
+		input[readId][10]=input[readId][10].replace("watch?v=", "embed/");
+		console.log(input[readId][10])
+		$("#span"+readId).append("<iframe width='840' height='500' src='"+input[readId][10]+"'></iframe>")
 	}
 	console.log(typeof window.location.search, readId);
 
