@@ -50,13 +50,17 @@ input = notArchived
 
 console.log(input);
 var numberofposts = input.length
-var poststart = 0, postNum = Math.min(5,numberofposts), postend = postNum
-render()
+var poststart = 0;
+var postNum = Math.min(5,numberofposts)
+var postend = postNum
+
 // Disable load next/prev btn when posts < 5
-if (numberofposts==5){
+if (numberofposts <= 5){
 	$("#loadnext").addClass('disabled');
 	$("#loadprev").addClass('disabled');
 }
+
+render();
 
 // Load next when btn clicked
 $("#loadnext").click(function(){
