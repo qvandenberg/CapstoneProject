@@ -51,7 +51,13 @@ input = notArchived
 console.log(input);
 var numberofposts = input.length
 var poststart = 0, postNum = 5, postend = postNum
-render()
+
+// Disable load next/prev btn when posts < 5
+if (numberofposts<postNum){
+	$("#loadnext").addClass('disabled');
+	$("#loadprev").addClass('disabled');
+	postend = numberofposts
+}
 
 // Load next when btn clicked
 $("#loadnext").click(function(){
@@ -99,9 +105,7 @@ $("#loadprev").click(function(){
     console.log('A', poststart, 'B', postend);
 });
 
-
-
-var readclicked = 0;
+render()
 
 // Function to render posts from int poststart to intpostend
 function render(){
@@ -158,3 +162,4 @@ function render(){
 
 	}
 }
+
