@@ -36,14 +36,20 @@ $.ajax({
 	success: function(data, status){
 		dataSheets = data;
 			}
-
-
 })
 console.log(dataSheets);
 
-input = dataSheets.values.reverse();
+var input = dataSheets.values.reverse();
+
+// Removing not archived
+var notArchived = []
+for (obji in input){
+	if (input[obji][9]=="YES") notArchived.push(input[obji])
+}
+input = notArchived
+
 console.log(input);
-var numberofposts = dataSheets.values.length
+var numberofposts = input.length
 var poststart = 0, postNum = 5, postend = postNum
 render()
 
@@ -57,7 +63,7 @@ $("#loadnext").click(function(){
 				$("#loadnext").removeClass('disabled');
         render();
     } else {
-        poststart=numberofposts-postNum;
+        poststart += postNum;
         postend=numberofposts;
         $("#loadnext").addClass('disabled');
         $("#loadprev").removeClass('disabled');
@@ -69,7 +75,15 @@ $("#loadnext").click(function(){
 // Load previous when btn clicked
 $("#loadprev").click(function(){
     $("#mainposts").empty();
-    if (poststart-postNum > 0){
+		if (poststart>numberofposts - postNum){
+			/* Implement only after re-checking
+			poststart = numberofposts - postNum - numberofposts % postNum;
+			postend = poststart+postNum;
+			$("#loadprev").removeClass('disabled');
+			$("#loadnext").removeClass('disabled');
+			render()*/ 
+		}
+    else if (poststart-postNum > 0){
         poststart -= postNum
         postend -= postNum
 				$("#loadprev").removeClass('disabled');
@@ -87,10 +101,13 @@ $("#loadprev").click(function(){
 
 
 
+var readclicked = 0;
+
 // Function to render posts from int poststart to intpostend
 function render(){
 	console.log('render', poststart, postend)
 	for (var i = poststart; i < postend; i++){
+		console.log('post', i)
 		var id = i.toString()
 		var article = $("<article class = 'post' id = art" + id + ">" +
 							"<header id = hd" + id + ">" +
@@ -111,7 +128,7 @@ function render(){
 							"<p id = p" + id + "></p>" +
 							"<footer id = f" + id + ">" +
 								"<ul class='actions'>" +
-									"<li><a href='#'' class='button big'>Continue Reading</a></li>" +
+									"<li><a href='single.html?" + id + "#sp" + id + "' class='button big' id = read" + id + ">Continue Reading</a></li>" +
 								"</ul>" +
 								"<ul class='stats'>" +
 									"<li><a href='#' id = topic" + id + "></a></li>" +
@@ -125,19 +142,17 @@ function render(){
 		$("#t"+id).append(input[i][3]); //title
 		$("#h"+id).append(input[i][4]); //heading
 		$("#sub"+id).append(input[i][5]); //subheading
-		$("#p"+id).append(input[i][6]); //paragraph
+		$("#p"+id).append(input[i][6].substr(0, 350) + "..."); //paragraph
 		$("#topic"+id).append(input[i][7]); //topic
 
 		//inserting image or video
-		console.log(input[i][10])
 		if (input[i][10] == "IMAGE"){
 			$("#a2"+id).append("<img src='"+input[i][8]+"' alt='' />")
-		}
-		else if (input[i][10] == "VIDEO") {
+		} else if (input[i][10] == "VIDEO") {
 			//	swap watch?v= with embed/ in input[i][8]
 			input[i][8]=input[i][8].replace("watch?v=", "embed/");
-			console.log(input[i][8])
-				$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][8]+"'></iframe>")
+			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][8]+"'></iframe>")
 		}
+
 	}
 }
