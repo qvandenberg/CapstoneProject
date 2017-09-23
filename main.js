@@ -96,7 +96,7 @@ function render(){
 							"<p id = p" + id + "></p>" +
 							"<footer id = f" + id + ">" +
 								"<ul class='actions'>" +
-									"<li><a href='single.html?" + id + "' class='button big' id = read" + id + ">Continue Reading</a></li>" +
+									"<li><a href='single.html?" + id + "#sp" + id + "' class='button big' id = read" + id + ">Continue Reading</a></li>" +
 								"</ul>" +
 								"<ul class='stats'>" +
 									"<li><a href='#' id = topic" + id + "></a></li>" +

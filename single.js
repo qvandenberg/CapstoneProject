@@ -43,8 +43,18 @@ window.onload = () => {
 		console.log(input[readId][8])
 		$("#span"+readId).append("<iframe width='840' height='500' src='"+input[readId][8]+"'></iframe>")
 	}
-	console.log(typeof window.location.search, readId);		
+	console.log(typeof window.location.search, readId);
+
+	//Scroll to body
+	$(document).ready(function () {
+    // Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#sp' + readId).offset().top
+    }, 'slow');
+});
+	
 }
+
 
 
 
