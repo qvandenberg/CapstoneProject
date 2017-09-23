@@ -27,7 +27,7 @@ window.onload = () => {
 								"</article>");
 
 	$("#smainpost").append(singleArticle); //article 
-	$("#sname"+readId).append(input[readId][11]); console.log ("name:" input[readId][11] )//author name
+	$("#sname"+readId).append(input[readId][11]); //author name
 	$("#st"+readId).append(input[readId][2]); //title
 	$("#sh"+readId).append(input[readId][3]); //heading
 	$("#ssub"+readId).append(input[readId][4]); //subheading
