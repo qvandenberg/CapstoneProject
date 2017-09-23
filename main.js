@@ -4,7 +4,7 @@ const API_KEY = "?key=AIzaSyDQkiv-Fe56n9mcjFZ0BEZpJI5c-RhmyvE";
 var range = "/values/" + "A" + ":" + "A";
 var dataSheets = {};
 
-// finding no. of rows from spreadsheet 
+// finding no. of rows from spreadsheet
 $.ajax({
 	type: "GET",
 	url: link + spreadsheetID + range + API_KEY,
@@ -102,7 +102,7 @@ function render(){
 	for (let i = poststart; i < postend; i++){
 		console.log('post', i)
 		let id = i.toString()
-		
+
 		//setting color scheme
 		theme = input[i][13]
 		var textcolor = '#888888';
@@ -128,8 +128,8 @@ function render(){
 			textcolor = '#F3802C'
 			bgcolor = '#ffeead'
 		}
-		
-		
+
+
 		let article = $("<article class = 'post' id = art" + id + " style = 'background:"+ bgcolor + "'>" +
 							"<header id = hd" + id + ">" +
 								"<div class = 'title'>" +
@@ -152,8 +152,8 @@ function render(){
 								"</ul>" +
 								"<ul class='stats'>" +
 									"<li><a href='#' id = topic" + id + "></a></li>" +
-									"<li><a href='#' class='icon fa-heart'>28</a></li>" +
-									"<li><a href='#' class='icon fa-comment'>128</a></li>" +
+									"<li><a href='#' class='icon fa-heart'>0</a></li>" +
+									"<li><a href='#' class='icon fa-comment'>0</a></li>" +
 								"</ul>" +
 							"</footer>" +
 						"</article>");
@@ -190,7 +190,7 @@ function render(){
 			input[i][10]=input[i][10].replace("watch?v=", "embed/");
 			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][10]+"'></iframe>")
 		}
-		
+
 		// styling text color
 		var textId = ["#name"+id, "#t"+id, "#h"+id, "#sub"+id, "#topic"+id, "#p"+id, ]
 		for (id of textId) $(id).css('color', textcolor);
