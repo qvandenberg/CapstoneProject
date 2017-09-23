@@ -69,13 +69,13 @@ $("#loadnext").click(function(){
         postend+=postNum;
 				$("#loadprev").removeClass('disabled');
 				$("#loadnext").removeClass('disabled');
-        render();
+        render(input, poststart, postend);
     } else {
         poststart += postNum;
         postend=numberofposts;
         $("#loadnext").addClass('disabled');
         $("#loadprev").removeClass('disabled');
-				render();
+				render(input, poststart, postend);
     }
     console.log('A', poststart, 'B', postend);
 });
@@ -88,30 +88,32 @@ $("#loadprev").click(function(){
 			postend = poststart+postNum;
 			$("#loadprev").removeClass('disabled');
 			$("#loadnext").removeClass('disabled');
-			render()
+			render(input, poststart, postend)
 		}
     else if (poststart-postNum > 0){
         poststart -= postNum
         postend -= postNum
 				$("#loadprev").removeClass('disabled');
 				$("#loadnext").removeClass('disabled');
-        render()
+        render(input, poststart, postend)
     } else {
         poststart=0
         postend=postNum
-        render()
+        render(input, poststart, postend)
         $("#loadprev").addClass('disabled')
         $("#loadnext").removeClass('disabled')
     }
     console.log('A', poststart, 'B', postend);
 });
 
-render();
+
+render(input, poststart, postend);
+
 
 // Function to render posts from int poststart to intpostend
-function render(){
-	console.log('render', poststart, postend)
-	for (var i = poststart; i < postend; i++){
+function render(inputA, starthere, endhere){
+	console.log('render', starthere, endhere)
+	for (var i = starthere; i < endhere; i++){
 		console.log('post', i)
 		var id = i.toString()
 		var article = $("<article class = 'post' id = art" + id + ">" +
@@ -144,22 +146,63 @@ function render(){
 						"</article>");
 
 		$("#mainposts").append(article); //article
-		$("#name"+id).append(input[i][11]); //author name
-		$("#t"+id).append(input[i][2]); //time
-		$("#h"+id).append(input[i][3]); //heading
-		$("#sub"+id).append(input[i][4]); //subheading
-		$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
-		$("#topic"+id).append(input[i][6]); //topic
+		$("#name"+id).append(inputA[i][11]); //author name
+		$("#t"+id).append(inputA[i][2]); //time
+		$("#h"+id).append(inputA[i][3]); //heading
+		$("#sub"+id).append(inputA[i][4]); //subheading
+		$("#p"+id).append(inputA[i][5].substr(0, 350) + "..."); //paragraph
+		$("#topic"+id).append(inputA[i][6]); //topic
 
 		//inserting image or video
-		if (input[i][8] == "IMAGE"){
-			input[i][9]=input[i][9].replace("open?id=", "uc?id=");
+		if (inputA[i][8] == "IMAGE"){
+			inputA[i][9]=inputA[i][9].replace("open?id=", "uc?id=");
 			$("#a2"+id).append("<img src='"+input[i][9]+"&export=download' alt='' />")
-		} else if (input[i][8] == "VIDEO") {
+		} else if (inputA[i][8] == "VIDEO") {
 			//	swap watch?v= with embed/ in input[i][8]
-			input[i][10]=input[i][10].replace("watch?v=", "embed/");
-			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][10]+"'></iframe>")
+			inputA[i][10]=inputA[i][10].replace("watch?v=", "embed/");
+			$("#a2"+id).append("<iframe width='840' height='500' src='"+inputA[i][10]+"'></iframe>")
 		}
 
 	}
 }
+
+//find search term from window
+var searchresults = [];
+var searchterm = window.location.search.substr(7).toLowerCase();
+console.log("lowercase searchterm:", searchterm);
+console.log("search term:", searchterm, "typeof:", typeof searchterm, "length:", searchterm.length);
+
+//only run when searching
+if (searchterm != ""){
+
+	//find matches
+	for (objj in input){
+		if (input[objj].join(" ").toLowerCase().search(searchterm) != -1){
+			console.log("loging obj:", input[objj].join())
+			searchresults.push(input[objj]);
+		}
+	}
+
+//empty index.html
+$("#mainposts").empty();
+
+//create feedback message
+var message = "";
+if (searchresults.length != 0){
+	message = $("<h2 style = 'text-align:center'>SEARCH RESULTS:</h2>");
+}
+else
+{
+	message = $("<h2 style = 'text-align:center'>NOTHING FOUND!</h2>");
+}
+
+//render message and results
+$("#mainposts").append(message)
+console.log("searchresults:", searchresults);
+render(searchresults, 0, searchresults.length);
+
+}
+
+
+
+
