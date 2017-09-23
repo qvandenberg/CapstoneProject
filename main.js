@@ -51,13 +51,14 @@ for (obji in input){
 input = notArchived
 
 console.log(input);
-var numberofposts = dataSheets.values.length
+var numberofposts = input.length
 var poststart = 0, postend = 5
 render()
 
 // Load more when btn clicked 
 $("#load").click(function(){
 	$("#mainposts").empty();
+	console.log(postend+5, numberofposts)
 	if (postend+5<numberofposts){
 		poststart+=5 
 		postend+=5
@@ -76,6 +77,7 @@ var readclicked = 0;
 function render(){
 	console.log('render', poststart, postend)
 	for (var i = poststart; i < postend; i++){
+		console.log('post', i)
 		var id = i.toString()
 		var article = $("<article class = 'post' id = art" + id + ">" + 
 							"<header id = hd" + id + ">" + 
