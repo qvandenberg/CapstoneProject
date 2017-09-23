@@ -99,13 +99,13 @@ render();
 // Function to render posts from int poststart to intpostend
 function render(){
 	console.log('render', poststart, postend)
-	for (var i = poststart; i < postend; i++){
+	for (let i = poststart; i < postend; i++){
 		console.log('post', i)
-		var id = i.toString()
+		let id = i.toString()
 		
 		//setting color scheme
 		theme = input[i][13]
-		var textcolor = '#aaaaaa';
+		var textcolor = '#888888';
 		var bgcolor = 'white'
  		if (theme == 'Forest (Green)'){
 			textcolor = 'green'
@@ -130,7 +130,7 @@ function render(){
 		}
 		
 		
-		var article = $("<article class = 'post' id = art" + id + " style = 'background:"+ bgcolor + "'>" +
+		let article = $("<article class = 'post' id = art" + id + " style = 'background:"+ bgcolor + "'>" +
 							"<header id = hd" + id + ">" +
 								"<div class = 'title'>" +
 									 "<h2 id = h" + id + "></h2>" +
@@ -164,7 +164,7 @@ function render(){
 		$("#h"+id).append(input[i][3]); //heading
 		$("#sub"+id).append(input[i][4]); //subheading
 		$("#topic"+id).append(input[i][6]); //topic
-		
+
 		//continue reading ... & btn
 		if (input[i][5].length > 350){
 			$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
@@ -172,14 +172,14 @@ function render(){
 			$("#p"+id).append(input[i][5])
 			$("#ul"+id).empty()
 		}
-		
+
 		//inserting avatar image if exists
 		if (input[i][12]){
 			input[i][12]=input[i][12].replace("open?id=", "uc?id=");
 			$("#a1"+id).append("<img src='"+input[i][12]+"&export=download' alt='' />")
 		} else{
 			$("#a1"+id).append("<img src='images/avatar.jpg' alt='' id = img1" + id + "/>")
-		} 
+		}
 
 		//inserting image or video
 		if (input[i][8] == "IMAGE"){
@@ -197,3 +197,21 @@ function render(){
 		$("#art"+id).css('background', bgcolor);
 	}
 }
+
+// Create menu bar on side with hard-coded search bar
+function menubar(){
+	for (let i = poststart; i < postend; i++){
+		let id = i.toString();
+		let menuItem = $("<li>"+
+										 "<a href=\'single.html?"+id+"#sp" +id+"\'>"+ // placeholder for link
+											"<h3 id=menuh"+ id+"></h3>"+
+											"<p id= p2id"+id+"></p>"+
+											"</a>"+
+											"</li>"
+										);
+
+		$("#menuitems").append(menuItem); //menu item
+		$("#menuh"+id).append(input[i][3]); // title
+		$("#p2id"+id).append(input[i][4]); // subtitle
+}}
+menubar();
