@@ -42,14 +42,23 @@ $.ajax({
 console.log(dataSheets);
 
 input = dataSheets.values.reverse();
+
+// Removing not archived 
+var notArchived = []
+for (obji in input){
+	if (input[obji][9]=="YES") notArchived.push(input[obji])
+}
+input = notArchived
+
 console.log(input);
-var numberofposts = dataSheets.values.length
+var numberofposts = input.length
 var poststart = 0, postend = 5
 render()
 
 // Load more when btn clicked 
 $("#load").click(function(){
 	$("#mainposts").empty();
+	console.log(postend+5, numberofposts)
 	if (postend+5<numberofposts){
 		poststart+=5 
 		postend+=5
@@ -60,7 +69,6 @@ $("#load").click(function(){
 		render()
 		$("#load").addClass('disabled')
 	}
-	console.log('A', poststart, 'B', postend);
 })
 
 var readclicked = 0;
@@ -69,6 +77,7 @@ var readclicked = 0;
 function render(){
 	console.log('render', poststart, postend)
 	for (var i = poststart; i < postend; i++){
+		console.log('post', i)
 		var id = i.toString()
 		var article = $("<article class = 'post' id = art" + id + ">" + 
 							"<header id = hd" + id + ">" + 
@@ -110,13 +119,11 @@ function render(){
 		$("#topic"+id).append(input[i][7]); //topic
 		
 		//inserting image or video
-		console.log(input[i][10])
 		if (input[i][10] == "IMAGE"){
 			$("#a2"+id).append("<img src='"+input[i][8]+"' alt='' />")
 		} else if (input[i][10] == "VIDEO") {
-		//	swap watch?v= with embed/ in input[i][8]
-		input[i][8]=input[i][8].replace("watch?v=", "embed/");
-		console.log(input[i][8])
+			//	swap watch?v= with embed/ in input[i][8]
+			input[i][8]=input[i][8].replace("watch?v=", "embed/");
 			$("#a2"+id).append("<iframe width='840' height='500' src='"+input[i][8]+"'></iframe>")
 		}
 
