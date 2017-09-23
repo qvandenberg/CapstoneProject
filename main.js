@@ -115,7 +115,7 @@ function render(){
 		$("#t"+id).append(input[i][3]); //title
 		$("#h"+id).append(input[i][4]); //heading
 		$("#sub"+id).append(input[i][5]); //subheading
-		$("#p"+id).append(input[i][6]); //paragraph
+		$("#p"+id).append(input[i][6].substr(0, 350) + "..."); //paragraph
 		$("#topic"+id).append(input[i][7]); //topic
 		
 		//inserting image or video
