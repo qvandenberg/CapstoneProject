@@ -63,6 +63,8 @@ $("#load").click(function(){
 	console.log('A', poststart, 'B', postend);
 })
 
+var readclicked = 0;
+
 // Function to render posts from int poststart to intpostend
 function render(){
 	console.log('render', poststart, postend)
@@ -88,7 +90,7 @@ function render(){
 							"<p id = p" + id + "></p>" +
 							"<footer id = f" + id + ">" +
 								"<ul class='actions'>" +
-									"<li><a href='#'' class='button big'>Continue Reading</a></li>" +
+									"<li><a href='single.html?" + id + "' class='button big' id = read" + id + ">Continue Reading</a></li>" +
 								"</ul>" +
 								"<ul class='stats'>" +
 									"<li><a href='#' id = topic" + id + "></a></li>" +
@@ -97,6 +99,7 @@ function render(){
 								"</ul>" +
 							"</footer>" +
 						"</article>");	
+
 		$("#mainposts").append(article);
 		$("#name" + id).append(input[i][2]);
 		$("#t" + id).append(input[i][3]);
@@ -104,8 +107,15 @@ function render(){
 		$("#sub" + id).append(input[i][5]);
 		$("#p" + id).append(input[i][6]);
 		$("#topic" + id).append(input[i][7]);
+
 	}
 }
+
+var readmoreId = window.location.search.substr(1);
+
+console.log(typeof window.location.search, readmoreId);
+
+
 
 
 
