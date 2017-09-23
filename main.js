@@ -50,7 +50,7 @@ input = notArchived
 
 console.log(input);
 var numberofposts = input.length
-var poststart = 0, postNum = 5, postend = postNum
+var poststart = 0, postNum = Math.min(5,numberofposts), postend = postNum
 render()
 
 // Load next when btn clicked
@@ -76,12 +76,11 @@ $("#loadnext").click(function(){
 $("#loadprev").click(function(){
     $("#mainposts").empty();
 		if (poststart>numberofposts - postNum){
-			/* Implement only after re-checking
 			poststart = numberofposts - postNum - numberofposts % postNum;
 			postend = poststart+postNum;
 			$("#loadprev").removeClass('disabled');
 			$("#loadnext").removeClass('disabled');
-			render()*/
+			render()
 		}
     else if (poststart-postNum > 0){
         poststart -= postNum
@@ -137,15 +136,15 @@ function render(){
 								"</ul>" +
 							"</footer>" +
 						"</article>");
-		
+
 		$("#mainposts").append(article); //article
-		$("#name"+id).append(input[i][11]); console.log("name:", input[i][11]); //author name
+		$("#name"+id).append(input[i][11]); //author name
 		$("#t"+id).append(input[i][2]); //time
 		$("#h"+id).append(input[i][3]); //heading
 		$("#sub"+id).append(input[i][4]); //subheading
 		$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
 		$("#topic"+id).append(input[i][6]); //topic
-		
+
 		//inserting image or video
 		if (input[i][8] == "IMAGE"){
 			input[i][9]=input[i][9].replace("open?id=", "uc?id=");
