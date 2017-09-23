@@ -101,8 +101,6 @@ $("#loadprev").click(function(){
 
 
 
-var readclicked = 0;
-
 // Function to render posts from int poststart to intpostend
 function render(){
 	console.log('render', poststart, postend)
@@ -137,7 +135,7 @@ function render(){
 								"</ul>" +
 							"</footer>" +
 						"</article>");
-		
+
 		$("#mainposts").append(article); //article
 		$("#name"+id).append(input[i][11]); console.log("name:", input[i][11]); //author name
 		$("#t"+id).append(input[i][2]); //time
