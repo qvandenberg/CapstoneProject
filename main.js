@@ -60,7 +60,6 @@ if (numberofposts <= 5){
 	$("#loadprev").addClass('disabled');
 }
 
-render();
 
 // Load next when btn clicked
 $("#loadnext").click(function(){
@@ -107,7 +106,7 @@ $("#loadprev").click(function(){
     console.log('A', poststart, 'B', postend);
 });
 
-render()
+render();
 
 // Function to render posts from int poststart to intpostend
 function render(){
