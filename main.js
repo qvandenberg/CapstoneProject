@@ -23,7 +23,7 @@ $.ajax({
 	async: false,
 	success: function(data, status){
 	         	console.log("Length:", data.values.length, "Status :", status);
-	         	range = "/values/" + "A2:" + "L" + (data.values.length).toString();
+	         	range = "/values/" + "A2:" + "M" + (data.values.length).toString();
 	     	}
 
 })
@@ -124,7 +124,6 @@ function render(){
 									"<time class = 'published' id = t" + id + "></time>" +
 									"<a href='#' class='author' id = a1" + id + ">" +
 										"<span class='name' id=name" + id + ">" + "</span>" +
-										 "<img src='images/avatar.jpg' alt='' id = img1" + id + "/>" +
 									"</a>" +
 								"</div>" +
 							"</header>" +
@@ -150,6 +149,14 @@ function render(){
 		$("#sub"+id).append(input[i][4]); //subheading
 		$("#p"+id).append(input[i][5].substr(0, 350) + "..."); //paragraph
 		$("#topic"+id).append(input[i][6]); //topic
+		
+		//inserting avatar image if exists
+		if (input[i][12]){
+			input[i][12]=input[i][12].replace("open?id=", "uc?id=");
+			$("#a1"+id).append("<img src='"+input[i][12]+"&export=download' alt='' />")
+		} else{
+			$("#a1"+id).append("<img src='images/avatar.jpg' alt='' id = img1" + id + "/>")
+		} 
 
 		//inserting image or video
 		if (input[i][8] == "IMAGE"){
