@@ -1,6 +1,6 @@
 var link =  "https://sheets.googleapis.com/v4/spreadsheets/";
 const spreadsheetID = "1EX_QfOxLd6JM12nuSwlaJ4vJo4cESEf8wAXaHmFQfcg";
-const API_KEY = "?key=AIzaSyDQkiv-Fe56n9mcjFZ0BEZpJI5c-RhmyvE";
+const API_KEY = ""; //Add your own API key here from google's sheets API
 var range = "/values/" + "A" + ":" + "A";
 var dataSheets = {};
 
